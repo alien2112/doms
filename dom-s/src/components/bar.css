@@ -1,0 +1,83 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fcffde;
+  padding: 1px 5%;
+  transition: 0.5;
+  position: sticky;
+  
+  
+}
+
+.logo {
+  width: 160;
+  cursor: pointer;
+  margin-left: -35px;
+  
+}
+ul {
+  flex: 1;
+  list-style: none;
+  text-align: center;
+  
+}
+ul li {
+  display: inline-block;
+  margin: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+ 
+}
+
+.toggle-icon {
+  width: 50px;
+  cursor: pointer;
+  margin-left: 40px;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #242424;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+.search-box input {
+  background: transparent;
+  padding: 6px;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  font-size: 18px;
+  max-width: 200px;
+}
+
+.search-box input::placeholder {
+  color: #fff;
+}
+.search-box img {
+  width: 20px;
+  cursor: pointer;
+}
+.dark .navbar {
+  background-color: #000;
+  color: #fff;
+}
+.dark .search-box {
+  background-color: #222;
+}
+
+.dark .search-box input {
+  background-color: #222;
+}
+.dark .search-box input::placeholder {
+  background-color: #222;
+}
+
+
+/* Apply the hover effect */
+.underlinee:hover {
+  /* Color of the underline on hover */
+  color: rgb(205, 127, 50)      
+}
