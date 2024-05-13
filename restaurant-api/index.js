@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 // dotenv library to keep our secret keys like the mongoDB url for our database 
 const dotenv = require("dotenv");
 const cors = require("cors")
-app.use(cors())
+app.use(cors({
+  origin: 'https://your-vercel-app.vercel.app',
+}));
 // configuration for the library
 dotenv.config();
 
