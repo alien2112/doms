@@ -11,18 +11,19 @@ import { Button } from "react-bootstrap"
 import { CartContext } from '../context/cart-context';
 function Bar({ theme, setTheme }) {
   const {getCount,openCart} = useContext(CartContext)
+  
   function toggle_theme() {
     theme == "light" ? setTheme("dark") : setTheme("light");
   }
 
   return (
     <div className={theme==="dark"? `dark`:``}>
-      <div className="navbar flex-col md:flex-row justify-between items-center ">
+      <div className="navbar flex-col sm:flex-row justify-between items-center grid-cols-3">
         <a href="#first">
         <img
           src={theme == "light" ? Logo22 : Logo22}
           alt=""
-          className="logo xs:ml-28"
+          className="logo ml-1 sm:ml-0"
           
         />
         </a>
@@ -38,7 +39,7 @@ function Bar({ theme, setTheme }) {
             alt=""
           />
         </div> */}
-     <div className="flex justify-center">
+     <div className="flex justify-center mb-2 md:mb-0">
           <Button
             
             style={{ width: "3rem", height: "3rem", position: "relative" }}
@@ -76,7 +77,7 @@ function Bar({ theme, setTheme }) {
         <img
           src={theme == "light" ? toggle_light : toggle_dark}
           alt=""
-          className="toggle-icon justify-between items-center"
+          className="toggle-icon justify-between items-center mr-6 md:mr-0"
           onClick={toggle_theme}
         />
       </div>

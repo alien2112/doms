@@ -40,14 +40,14 @@ function Checkout() {
       const userId = JSON.parse(localStorage.getItem("loggedInUser"))._id;
 
       if (cartId) {
-        const cart = await axios.get(`http://localhost:5000/api/v1/carts/find/${cartId}`, {
+        const cart = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/carts/find/${cartId}`, {
           headers: {
             token: `Bearer ${authToken}`,
           },
         });
 
         const orderResponse = await axios.post(
-          "http://localhost:5000/api/v1/orders/create",
+          `${process.env.REACT_APP_API_URL}/api/v1/orders/create`,
           {
             userId,
             products: cart.data.products,

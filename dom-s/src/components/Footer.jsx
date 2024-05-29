@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-200">
+    <footer className="bg-white border-t border-gray-200 ">
       <div className="px-4 py-2 mx-auto flex justify-between items-center">
-        <nav className="flex gap-4 font-bold left-full">
+        <nav className="flex gap-2 font-bold left-full sm:gap-4">
           <NavLink to="/about" className="text-gray-500 hover:text-gray-900 transition duration-300">
             About
           </NavLink>
@@ -23,7 +23,7 @@ function Footer() {
           </a>
         </nav>
         <div className="border-r border-gray-200 h-8"></div> {/* Vertical line */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center ml-2 sm:ml-0">
           <div className="text-gray-500 mb-2">Phone: +20106500046</div>
           <div className="flex space-x-6">
             <a href="https://www.facebook.com/doms.egypt/" className="text-gray-500 hover:text-gray-900 transition duration-300">

@@ -14,7 +14,7 @@ const Admin = () => {
     const authToken = localStorage.getItem("authToken");
 
     const fetchUsers = () => {
-        axios.get('http://localhost:5000/api/v1/users/find', {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/v1/users/find`, {
             headers: {
                 token: `Bearer ${authToken}`,
             },
@@ -26,7 +26,7 @@ const Admin = () => {
     };
 
     const fetchOrders = () => {
-        axios.get('http://localhost:5000/api/v1/orders/find', {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/v1/orders/find`, {
             headers: {
                 token: `Bearer ${authToken}`,
             },
@@ -38,7 +38,7 @@ const Admin = () => {
     };
 
     const fetchStats = () => {
-        axios.get('http://localhost:5000/api/v1/users/stats', {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/v1/users/stats`, {
             headers: {
                 token: `Bearer ${authToken}`,
             },
@@ -50,7 +50,7 @@ const Admin = () => {
     };
 
     const fetchIncome = () => {
-        axios.get('http://localhost:5000/api/v1/orders/income', {
+        axios.get(`${process.env.REACT_APP_API_URL}/api/v1/orders/income`, {
             headers: {
                 token: `Bearer ${authToken}`,
             },
@@ -70,7 +70,7 @@ const Admin = () => {
 
     const handleAddUser = () => {
         if (newUser.username && newUser.email ) {
-            axios.post('http://localhost:5000/api/v1/users', newUser, {
+            axios.post(`${process.env.REACT_APP_API_URL}/api/v1/users`, newUser, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 },
@@ -86,7 +86,7 @@ const Admin = () => {
     };
 
     const handleRemoveUser = (id) => {
-        axios.delete(`http://localhost:5000/api/v1/users/delete/${id}`, {
+        axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/users/delete/${id}`, {
             headers: {
                 token: `Bearer ${authToken}`,
             },
@@ -97,7 +97,7 @@ const Admin = () => {
         });
     };
     const handleRemoveOrder = (id) => {
-        axios.delete(`http://localhost:5000/api/v1/orders/delete/${id}`, {
+        axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/orders/delete/${id}`, {
             headers: {
                 Authorization: `Bearer ${authToken}`,
             },

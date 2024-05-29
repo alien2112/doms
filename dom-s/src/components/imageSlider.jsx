@@ -1,70 +1,59 @@
 import { useEffect, useState } from "react";
-
-const slideStyles = {
-  width: "100%",
-  height: "100%",
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-};
-
-const sliderStyles = {
-  position: "relative",
-  height: "100%",
-};
-
-const dotsContainerStyles = {
-  display: "flex",
-  justifyContent: "center",
-};
-
-const dotStyle = {
-  margin: "0 3px",
-  cursor: "pointer",
-  fontSize: "30px",
-};
+import "./imageSlider.css"; // Assume styles are here
 
 const ImageSlider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoSlideEnabled, setIsAutoSlideEnabled] = useState(true); // Flag to control auto-slide
+  const [isAutoSlideEnabled, setIsAutoSlideEnabled] = useState(true); 
 
+const handleTouchStart = (e) => {
+  const touchDown = e.touches[0].clientX;
+  setTouchPosition(touchDown);
+};
+
+const handleTouchMove = (e) => {
+  if (!touchPosition) return;
+  const currentTouch = e.touches[0].clientX;
+  const diff = touchPosition - currentTouch;
   
-  useEffect(() => {
-    if (isAutoSlideEnabled) {
-      const intervalId = setInterval(() => {
-        setCurrentIndex(currentIndex => (currentIndex + 1) % slides.length);
-      }, 6000);
+  if (diff > 5) {
+    // Swipe left
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length)
+    setTouchPosition(null);
+  } else if (diff < -5) {
+    // Swipe right
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length)
+    setTouchPosition(null)
+  }
+};
 
-      return () => clearInterval(intervalId);
-    }
-  }, [isAutoSlideEnabled, slides.length]);
+  useEffect(() => {
+    const interval = isAutoSlideEnabled ? setInterval(() => {
+      setCurrentIndex(currentIndex => (currentIndex + 1) % slides.length);
+    }, 6000) : null;
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isAutoSlideEnabled, slides.length, currentIndex]);
 
   const goToSlide = (slideIndex) => {
     setIsAutoSlideEnabled(false); 
     setTimeout(() => setIsAutoSlideEnabled(true), 1000); 
     setCurrentIndex(slideIndex);
   };
-  const slideStylesWidthBackground = {
-    ...slideStyles,
-    backgroundImage: `url(${slides[currentIndex].url})`,
-  };
 
   return (
-    
-    <div style={sliderStyles}>
-        
-      <div>
-      </div>
-      <div  style={slideStylesWidthBackground}></div>
-      <div className="flex transition-transform duration-500"  style={dotsContainerStyles}>
-        {slides.map((slide, slideIndex) => (
+    <div className="slider">
+      <div className="slide-image" style={{ backgroundImage: `url(${slides[currentIndex].url})` }}></div>
+      <div className="dots-container">
+        {slides.map((slide, index) => (
           <div
-            style={dotStyle}
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-            className={ slideIndex === currentIndex ?"text-white" : ""}
+            className={`dot ${index === currentIndex ? "active" : ""}`}
+            key={index}
+            onClick={() => goToSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
           >
-
-            ● 
+            ●
           </div>
         ))}
       </div>

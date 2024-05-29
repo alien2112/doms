@@ -32,7 +32,7 @@ function Form({ user,setUser,setIsSignedIn, theme }) {
     try {
       const { username, password } = formData;
       const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "`${process.env.REACT_APP_API_URL}/api/v1/auth/login",
         { username, password }
       );
       console.log("Login successful:", response.data);
@@ -74,7 +74,7 @@ console.log("Authentication token stored in localStorage:", response.data.access
       const { repeatPassword, ...formDataWithoutRepeatPassword } = formData;
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/auth/register",
+        "`${process.env.REACT_APP_API_URL}/api/v1/auth/register",
         formDataWithoutRepeatPassword
       );
 

@@ -9,11 +9,13 @@ const CartContextProvider = (props) => {
   const [cartItems, setCartItems] = useState([]);
   const cartId = localStorage.getItem("cartId");
   const authToken = localStorage.getItem("authToken");
+  const userId = JSON.parse(localStorage.getItem("loggedInUser"))._id;
+
   const fetchCartItems = async () => {
     try {
       if (cartId) {
         const response = await axios.get(
-          `http://localhost:5000/api/v1/carts/find/${cartId}`,
+          `${process.env.REACT_APP_API_URL}/api/v1/carts/find/${userId}`,
           {
             headers: {
               token: `Bearer ${authToken}`,
@@ -29,7 +31,7 @@ const CartContextProvider = (props) => {
 
   const getProductDetails = async (product) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/v1/products/find/${product._id}`);
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/products/find/${product._id}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching product details:", error);
@@ -39,9 +41,7 @@ const CartContextProvider = (props) => {
 
   const handleAddToCart = async (itemId) => {
     try {
-        const userId = JSON.parse(localStorage.getItem("loggedInUser"))._id;
-        const cartId = localStorage.getItem("cartId");
-        const authToken = localStorage.getItem("authToken");
+
 
         const productToAdd = { productId: itemId, quantity: 1 };
 
@@ -49,7 +49,7 @@ const CartContextProvider = (props) => {
        
 
         if (cartId) {
-            const cart = await axios.get(`http://localhost:5000/api/v1/carts/find/${cartId}`, {
+            const cart = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/carts/find/${userId}`, {
                 headers: {
                     token: `Bearer ${authToken}`,
                 },
@@ -62,7 +62,7 @@ const CartContextProvider = (props) => {
             };
 
             const updatedCartResponse = await axios.put(
-                `http://localhost:5000/api/v1/carts/update/${cartId}`,
+                `${process.env.REACT_APP_API_URL}/api/v1/carts/update/${cartId}`,
                 updatedCart,
                 {
                     headers: {
@@ -77,7 +77,7 @@ const CartContextProvider = (props) => {
             setGetCount(cart.data.product.length + 1);
         } else {
             const newCartResponse = await axios.post(
-                "http://localhost:5000/api/v1/carts/create",
+                `${process.env.REACT_APP_API_URL}/api/v1/carts/create`,
                 { userId, product: [productToAdd] },
                 {
                     headers: {
@@ -104,7 +104,7 @@ const CartContextProvider = (props) => {
   const updateCartItem = async (productId, quantity) => {
     try {
       const updatedCart = await axios.put(
-        `http://localhost:5000/api/v1/carts/update/${cartId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/carts/update/${cartId}`,
         {
           product: cartItems.map((item) =>
             item._id === productId ? { ...item, quantity: quantity } : item
@@ -126,7 +126,7 @@ const CartContextProvider = (props) => {
   const removeCartItem = async (productId) => {
     try {
       const updatedCart = await axios.put(
-        `http://localhost:5000/api/v1/carts/update/${cartId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/carts/update/${cartId}`,
         {
           product: cartItems.filter((item) => item._id !== productId),
         },

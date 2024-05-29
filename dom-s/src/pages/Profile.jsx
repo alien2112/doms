@@ -16,7 +16,7 @@ function Profile({ setIsSignedIn, user, theme, setTheme }) {
       const authToken = localStorage.getItem("authToken");
       const userId = JSON.parse(localStorage.getItem("loggedInUser"))._id;
       const response = await axios.get(
-        `http://localhost:5000/api/v1/orders/find/${userId}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/orders/find/${userId}`,
         {
           headers: {
             token: `Bearer ${authToken}`,

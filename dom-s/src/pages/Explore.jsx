@@ -8,7 +8,7 @@ const Explore = () => {
 
     useEffect(() => {
         axios
-          .get("http://localhost:5000/api/v1/products/find")
+          .get(`$process.env.REACT_APP_API_URL/api/v1/products/find`)
           .then((res) => {
             setMenuItems(res.data);
             console.log(res.data)
