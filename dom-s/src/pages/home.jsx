@@ -9,10 +9,10 @@ function Home() {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/products/find`);
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/v1/products/find`);
         // Assuming the response data is an array of objects with url and title properties
         const slideData = res.data.map(item => ({
-          url: item.imageUrl, // Adjust the property name based on your actual data
+          url: item.imageUrl, 
           title: item.title
         }));
         setSlides(slideData);
