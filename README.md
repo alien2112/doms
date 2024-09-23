@@ -42,11 +42,11 @@ Welcome to the GitHub repository for **Doms**, a modern website designed for a l
 ### Installation
 1. Clone the repository: 
    ```bash
-   git clone https://github.com/yourusername/doms-restaurant.git
+   git clone https://github.com/alien2112/doms.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd doms-restaurant
+   cd doms
    ```
 3. Install the required dependencies:
    ```bash
